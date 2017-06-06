@@ -6,6 +6,8 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import UserDropdown from './containers/user-dropdown';
 
+import UserCalendar from './containers/user-calendar';
+
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 class App extends Component {
@@ -24,6 +26,7 @@ class App extends Component {
         <div className="col-md-12">
           <h1 className="text-center">Aurity Challenge!</h1>
           <UserDropdown />
+          <UserCalendar />
         </div>
       </div>
     );

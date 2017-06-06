@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { selectUser } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 class UserDropdown extends Component {
   constructor(props) {
@@ -11,7 +13,7 @@ class UserDropdown extends Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
         <form className="form-horizontal">
           <div className="form-group">
             <label className="col-sm-2 control-label">Select User</label>
@@ -35,8 +37,13 @@ class UserDropdown extends Component {
   }
 
   onSelectUser(event) {
+    const value = event.target.value;
     this.setState({
-      selectedUser: event.target.value,
+      selectedUser: value,
+    }, () => {
+      const selectedUserObject = this.props.users.filter(x => x.id === +value)[0];
+
+      this.props.selectUser(selectedUserObject || "");
     });
   }
 }
@@ -47,4 +54,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(UserDropdown);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ selectUser: selectUser }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDropdown);
