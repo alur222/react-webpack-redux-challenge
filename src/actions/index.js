@@ -3,6 +3,7 @@ import axios from 'axios';
 export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_WEEKS = 'FETCH_WEEKS';
 export const FETCH_WEEK_BY_WEEK_NUMBER = 'FETCH_WEEK_BY_WEEK_NUMBER';
+export const UPDATE_WEEK_STATUS = 'UPDATE_WEEK_STATUS';
 
 const API_ENDPOINT = 'https://timesheet-staging-aurity.herokuapp.com/api';
 
@@ -31,9 +32,19 @@ export const fetchWeeks = (month, userId) => {
 }
 
 export const fetchWeekByWeekNumber = (week) => {
-  console.log(week)
   return {
     type: FETCH_WEEK_BY_WEEK_NUMBER,
     payload: week,
+  };
+}
+
+export const updateWeekStatus = (status, weekId, userId, notes) => {
+  const request = axios.put(`${API_ENDPOINT}/training/weeks/${weekId}/users/${userId}`, {
+    notes,
+    status,
+  });
+  return {
+    type: UPDATE_WEEK_STATUS,
+    payload: request,
   };
 }

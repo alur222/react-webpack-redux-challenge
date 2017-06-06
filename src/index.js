@@ -6,8 +6,9 @@ import ReduxPromise from 'redux-promise';
 
 import reducers from './reducers';
 import UserDropdown from './containers/user-dropdown';
-
 import UserCalendar from './containers/user-calendar';
+import WeekStatusUpdater from './containers/week-status-control';
+
 import 'clndr';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
@@ -25,11 +26,10 @@ class App extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-12">
-          <h1 className="text-center">Challenge</h1>
-          <UserDropdown />
-          <UserCalendar />
-        </div>
+        <h1 className="text-center">Challenge</h1>
+        <UserDropdown />
+        <UserCalendar />
+        <WeekStatusUpdater />
       </div>
     );
   }

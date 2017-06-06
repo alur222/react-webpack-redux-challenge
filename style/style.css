@@ -1,11 +1,12 @@
 .control-label {
   padding-top: 5px;
+  padding-left: 0px;
 }
 
 .cal1 {
   margin: 30px auto;
-  margin-left: 18px;
-  max-width: 600px;
+  margin-left: 0px;
+  /*max-width: 600px;*/
   font-family: 'Droid Sans Mono';
   font-size: 14px;
 }
