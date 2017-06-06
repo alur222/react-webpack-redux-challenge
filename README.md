@@ -1,6 +1,9 @@
 # Aurity Challenge
 
 ```
-> npm install
-> npm start
+> cd projectdirectory;
+> npm install;
+> npm start;
+> go to localhost:8080
+> enjoy!
 ```
