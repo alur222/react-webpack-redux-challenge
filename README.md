@@ -1,4 +1,4 @@
-# Aurity Challenge
+# React-Webpack-Redux Challenge
 
 ```
 > cd projectdirectory;
