@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "Aurity App Challenge",
   "main": "index.js",
-  "repository": "",
+  "repository": "https://github.com/skemb321/react-webpack-redux-challenge",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Raul Torrefiel Jr. <aluroticooo@gmail.com>",
+  "license": "",
   "devDependencies": {
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
