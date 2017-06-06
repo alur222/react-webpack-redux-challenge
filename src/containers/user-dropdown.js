@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectUser } from '../actions/index';
+import { selectUser, fetchUsers, fetchWeeks } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class UserDropdown extends Component {
@@ -11,9 +11,25 @@ class UserDropdown extends Component {
     };
   }
 
-  render() {
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+
+  renderUsers(user) {
     return (
-      <div className="row">
+      <option key={user.id} value={user.id}>{user.username}</option>
+    );
+  }
+
+  render() {
+    if (!this.props.users.length) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+
+    return (
+      <div className="row col-sm-12">
         <form className="form-horizontal">
           <div className="form-group">
             <label className="col-sm-2 control-label">Select User</label>
@@ -23,11 +39,7 @@ class UserDropdown extends Component {
                 onChange={this.onSelectUser.bind(this)}
                 className="form-control">
                 <option value=""></option>
-                {this.props.users.map((user) => {
-                  return (
-                    <option key={user.id} value={user.id}>{user.name}</option>
-                  )
-                })}
+                {this.props.users.map(this.renderUsers)}
               </select>
             </div>
           </div>
@@ -39,23 +51,28 @@ class UserDropdown extends Component {
   onSelectUser(event) {
     const value = event.target.value;
     this.setState({
-      selectedUser: value,
+      selectedUser: +value,
     }, () => {
       const selectedUserObject = this.props.users.filter(x => x.id === +value)[0];
 
       this.props.selectUser(selectedUserObject || "");
+      const date = new Date;
+      const month = date.getMonth() + 1;
+      this.props.fetchWeeks(month, value);
     });
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    users: state.users,
-  };
+function mapStateToProps({ users }) {
+  return { users };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectUser: selectUser }, dispatch);
+  return bindActionCreators({
+    selectUser: selectUser,
+    fetchUsers: fetchUsers,
+    fetchWeeks: fetchWeeks,
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDropdown);

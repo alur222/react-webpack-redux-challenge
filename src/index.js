@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 
 import reducers from './reducers';
 import UserDropdown from './containers/user-dropdown';
 
 import UserCalendar from './containers/user-calendar';
+import 'clndr';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class App extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <h1 className="text-center">Aurity Challenge!</h1>
+          <h1 className="text-center">Challenge</h1>
           <UserDropdown />
           <UserCalendar />
         </div>

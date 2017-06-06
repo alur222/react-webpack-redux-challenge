@@ -1,16 +1,9 @@
-export default function() {
-  return [
-    {
-      id: 1,
-      name: 'alur',
-    },
-    {
-      id: 2,
-      name: 'bbbb',
-    },
-    {
-      id: 3,
-      name: 'cccc',
-    },
-  ];
+import { FETCH_USERS } from '../actions/index';
+
+export default function(state = [], action) {
+  switch(action.type) {
+    case FETCH_USERS:
+      return action.payload.data;
+  }
+  return state;
 }
