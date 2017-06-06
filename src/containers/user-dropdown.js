@@ -58,7 +58,8 @@ class UserDropdown extends Component {
       this.props.selectUser(selectedUserObject || "");
       const date = new Date;
       const month = date.getMonth() + 1;
-      this.props.fetchWeeks(month, value);
+
+      if (value !== "") this.props.fetchWeeks(month, value);
     });
   }
 }

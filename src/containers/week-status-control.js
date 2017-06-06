@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateWeekStatus } from '../actions/index';
+import { fetchWeekByWeekNumber, updateWeekStatus } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 import $ from 'jquery';
@@ -39,13 +39,14 @@ class WeekStatusUpdater extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (props.userWeek.hasOwnProperty('serverUpdated')) {
+    if (props.userWeek.hasOwnProperty('serverUpdated') && props.user) {
       alert('Status Updated!');
+      props.fetchWeekByWeekNumber({});
     }
   }
 
   render() {
-    if(!this.props.userWeek.hasOwnProperty('week_id')) {
+    if(!this.props.userWeek.hasOwnProperty('week_id') || !this.props.user) {
       return (
         <div></div>
       );
@@ -75,6 +76,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     updateWeekStatus: updateWeekStatus,
+    fetchWeekByWeekNumber: fetchWeekByWeekNumber,
   }, dispatch);
 }
 
