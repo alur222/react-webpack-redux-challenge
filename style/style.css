@@ -1,3 +1,7 @@
+.control-label {
+  padding-top: 5px;
+}
+
 .cal1 {
   margin: 30px auto;
   margin-left: 18px;
@@ -5,6 +9,11 @@
   font-family: 'Droid Sans Mono';
   font-size: 14px;
 }
+
+.selected > td {
+  background: #f0ad4e !important;
+}
+
 .cal1 .clndr .clndr-controls {
   display: inline-block;
   width: 100%;

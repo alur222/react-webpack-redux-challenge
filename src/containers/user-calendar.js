@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchWeekByWeekNumber } from '../actions/index';
+import { fetchWeekByWeekNumber, fetchWeeks } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 import $ from 'jquery';
@@ -88,16 +88,22 @@ class UserCalendar extends Component {
         },
         template: clndrTemplate,
         clickEvents: {
-          click: function (target) {
+          click: (target) => {
             if (!$(target.element).hasClass('inactive')) {
-              console.log(target);
-              component.props.fetchWeekByWeekNumber(target.date.week());
+              const week = component.props.userWeeks.weeks.filter(x => x.week_number === target.date.week());
+              component.props.fetchWeekByWeekNumber(week.length ? week[0] : {});
+              const elem = $(target.element).parent('tr');
+              if (!elem.hasClass('selected')) {
+                elem.parents('tbody').find('tr.selected').removeClass('selected');
+                elem.addClass('selected');
+              }
             } else {
               console.log('That date is outside of the range.');
             }
           },
-          onMonthChange: function (month) {
-            console.log(month);
+          onMonthChange: (month) => {
+            const newMonth = month.month() + 1;
+            component.props.fetchWeeks(newMonth, component.props.user.id);
           },
         }
       });
@@ -117,6 +123,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchWeekByWeekNumber: fetchWeekByWeekNumber,
+    fetchWeeks: fetchWeeks,
   }, dispatch);
 }
 

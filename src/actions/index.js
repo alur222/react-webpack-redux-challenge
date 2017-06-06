@@ -30,9 +30,10 @@ export const fetchWeeks = (month, userId) => {
   };
 }
 
-export const fetchWeekByWeekNumber = (weekNumber) => {
+export const fetchWeekByWeekNumber = (week) => {
+  console.log(week)
   return {
     type: FETCH_WEEK_BY_WEEK_NUMBER,
-    payload: weekNumber,
+    payload: week,
   };
 }
